@@ -6,7 +6,7 @@
 name: Ablimit A. Keskin
 
 # Short bio or description (displayed in the header)
-description: Researcher for challenge, coder for joy, student for life.
+description: My primary expertise is in the research, design, and development of large scale data intensive systems and analytics infrastructure that spans parallel database systems and in-memory analytics systems.
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
 # avatar: https://media.licdn.com
@@ -23,7 +23,7 @@ footer-links:
   flickr:
   github: ablimit
   instagram:
-  linkedin: pub/ablimit-aji/7/129/64
+  linkedin: ablimit
   pinterest:
   rss: # just type anything here for a working RSS icon, make sure you set the "url" above!
   twitter: ablimitaji     
@@ -75,4 +75,3 @@ exclude:
     - LICENSE
     - README.md
     - CNAME
-
