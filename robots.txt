@@ -1,3 +1,2 @@
 User-agent: *
 Disallow: /blogarchives/
-Disallow: /notes/*
