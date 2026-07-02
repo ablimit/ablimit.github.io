@@ -59,13 +59,16 @@ Hero + narrative built only from the user's intro:
 ### 3. CV (`cv/index.html`)
 - Header: name + "CTO & Co-founder, Kouper." Remove physical address block.
 - Honors section near top: the three awards, exact titles, one-line context each.
-- Experience (reverse chronological):
-  - **Kouper** — CTO & Co-founder (present). AI-native care navigation platform.
-  - **Komodo Health** — early core technical member / engineering lead; longitudinal
-    patient-level data foundation.
-  - **Ionpath, Polarr** — data engineering / science (brief, understated).
-  - **Hewlett Packard Labs** — Research Scientist; memory-driven compute, petabyte-scale.
-  - **Emory University** — PhD research; Hadoop-GIS, computational pathology.
+- Experience (reverse chronological, with year ranges from public sources —
+  LinkedIn/Crunchbase/TheOrg):
+  - **Kouper** — CTO & Co-founder, 2022–present. AI-native care navigation platform.
+  - **Ionpath** — Data Engineering & Science, 2021–2022 (understated).
+  - **Polarr** — Data Engineering, 2020–2021 (understated).
+  - **Komodo Health** — Engineering Manager / early core technical member, 2017–2020;
+    longitudinal patient-level data foundation.
+  - **Hewlett Packard Labs** — Research Scientist, 2014–2017; memory-driven compute,
+    petabyte-scale.
+  - **Emory University** — PhD research, 2008–2014; Hadoop-GIS, computational pathology.
   - Internships: Yahoo! Search, Microsoft Research, Max-Planck Institute, Microsoft.
 - Education: PhD & MS Emory; BE USTB.
 - Publications: Scholar link + metrics; highlight Hadoop-GIS and SATO.
