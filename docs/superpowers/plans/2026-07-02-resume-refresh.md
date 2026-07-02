@@ -283,12 +283,14 @@ git commit -m "Rewrite CV: Kouper-first timeline, three honors, updated publicat
 
 ---
 
-### Task 4: Update contact page and remove dead pages
+### Task 4: Update contact page, remove dead pages, fix sitemap/robots
 
 **Files:**
 - Modify: `contact/index.html`
 - Delete: `projects/index.html`
 - Delete: `notes/index.html`
+- Modify: `sitemap.xml` (fix hardcoded domain)
+- Modify: `robots.txt` (remove stale /notes rule)
 
 **Interfaces:**
 - Consumes: `page.cv` / `page.contact` nav-state (Task 1).
@@ -322,16 +324,32 @@ git rm projects/index.html notes/index.html
 
 Expected: git stages both deletions.
 
-- [ ] **Step 3: Verify no in-repo links point to deleted pages**
+- [ ] **Step 3: Fix `sitemap.xml` hardcoded domain**
+
+The sitemap is a dynamic Liquid template (loops `site.pages`), so deleted pages drop out automatically. Only the hardcoded domain is wrong — it says `http://ablimit.github.com` but the CNAME is `ablimit.github.io`. Change both `<loc>` lines from `http://ablimit.github.com` to `https://ablimit.github.io`.
+
+- [ ] **Step 4: Fix `robots.txt`**
+
+Remove the stale `Disallow: /notes/*` line (the page no longer exists). Result:
+
+```
+User-agent: *
+Disallow: /blogarchives/
+```
+
+- [ ] **Step 5: Verify no in-repo links point to deleted pages, domain fixed**
 
 Run: `grep -rniE "href=\"/(projects|notes)" _includes index.html cv/index.html contact/index.html`
 Expected: no output.
 
-- [ ] **Step 4: Commit**
+Run: `grep -c "ablimit.github.com" sitemap.xml`
+Expected: `0`.
+
+- [ ] **Step 6: Commit**
 
 ```bash
-git add contact/index.html
-git commit -m "Contact: LinkedIn-only; remove stale Projects and Notes pages"
+git add contact/index.html sitemap.xml robots.txt
+git commit -m "Contact: LinkedIn-only; remove Projects/Notes; fix sitemap domain and robots"
 ```
 
 ---
@@ -452,11 +470,25 @@ Expected: no output.
 Run: `grep -l "Kouper" index.html cv/index.html && grep -c "Best Poster\|Best Presentation\|Test of Time" cv/index.html`
 Expected: both files listed; count ≥ 3.
 
-- [ ] **Step 4: Confirm working tree is clean and push branch**
+- [ ] **Step 4: Confirm working tree is clean**
 
 ```bash
 git status --short
 ```
 Expected: clean.
 
-Then confirm with the user before pushing `update-kouper` (outward-facing — see handoff).
+- [ ] **Step 5: Pre-push accuracy gate (BLOCKING — outward-facing content)**
+
+Before pushing, get the user to confirm these facts, since they are the authoritative source and the weakest-sourced items must not ship wrong:
+
+1. **Pathology Informatics award** — the site states "Best Presentation, Pathology Informatics (2012) — MIGIS…". This came from a single search summary (primary source was inaccessible). Confirm the exact **award name** and **paper title**.
+2. **Experience year ranges** — Kouper 2022–present; IONpath 2021–2022; Polarr 2020–2021; Komodo 2017–2020; HP Labs 2014–2017. These are from public aggregators (LinkedIn/Crunchbase). Confirm they're right.
+3. **IONpath / Polarr inclusion** — confirm the user still wants these prior roles listed.
+
+Also **flag (do not fix silently)**: `_includes/scripts.html` loads jQuery over `http://code.jquery.com` (mixed content — blocked on HTTPS Pages) and a dead `googlecode.com` prettify script. Nothing on the refreshed site depends on them (jQuery unused; prettify served the removed Notes). Offer to remove both as a follow-up.
+
+- [ ] **Step 6: Push branch** (only after user confirms Step 5)
+
+```bash
+git push -u origin update-kouper
+```
